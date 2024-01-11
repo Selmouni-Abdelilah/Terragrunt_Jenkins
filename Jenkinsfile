@@ -54,7 +54,7 @@ pipeline {
                 script {
                     dir('Terragrunt_files/dev') {
                         sh 'terragrunt run-all  init'
-                        sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive"
+                        sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive -lock=false"
                     }
                 }
             }    
@@ -64,7 +64,7 @@ pipeline {
                 script {
                     dir('Terragrunt_files/preprod') {
                         sh 'terragrunt run-all  init'
-                        sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive"
+                        sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive -lock=false"
                     }
                 }
             }    
@@ -74,7 +74,7 @@ pipeline {
                 script {
                     dir('Terragrunt_files/prod') {
                         sh 'terragrunt run-all  init'
-                        sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive"
+                        sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive -lock=false"
                     }
                 }
             }    
