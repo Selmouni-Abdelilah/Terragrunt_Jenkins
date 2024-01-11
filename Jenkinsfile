@@ -31,9 +31,10 @@ pipeline {
         stage('Tflint Testing') {
             steps {
                 script {
-                    dir('Terragrunt/modules') {
                     sh ' sudo curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash '
-                    sh ' tflint --module --recursive '
+                    dir('Terragrunt/modules') {
+                        sh ' tflint --init'
+                        sh ' tflint --module --recursive --force '
                     }
                 }
             }    
@@ -41,9 +42,9 @@ pipeline {
         stage('Tfsec Testing') {
             steps {
                 script {
-                    dir('Terragrunt/modules') {
                     sh ' sudo curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash '
-                    sh ' tfsec -s'
+                    dir('Terragrunt/modules') {
+                        sh ' tfsec -s'
                     }
                 }
             }    
@@ -52,7 +53,8 @@ pipeline {
             steps {
                 script {
                     dir('Terragrunt/Terragrunt_files/dev') {
-                    sh "terragrunt run-all  ${params.ACTION}"
+                        sh 'terragrunt run-all  init'
+                        sh "terragrunt run-all  ${params.ACTION} -auto-approve"
                     }
                 }
             }    
@@ -61,7 +63,8 @@ pipeline {
             steps {
                 script {
                     dir('Terragrunt/Terragrunt_files/preprod') {
-                    sh "terragrunt run-all  ${params.ACTION}"
+                        sh 'terragrunt run-all  init'
+                        sh "terragrunt run-all  ${params.ACTION}  -auto-approve"
                     }
                 }
             }    
@@ -70,7 +73,8 @@ pipeline {
             steps {
                 script {
                     dir('Terragrunt/Terragrunt_files/prod') {
-                    sh "terragrunt run-all  ${params.ACTION}"
+                        sh 'terragrunt run-all  init'
+                        sh "terragrunt run-all  ${params.ACTION} -auto-approve"
                     }
                 }
             }    
