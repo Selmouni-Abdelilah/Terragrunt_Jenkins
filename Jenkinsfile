@@ -60,7 +60,7 @@ pipeline {
         stage('PreProd Environment') {
             steps {
                 script {
-                    dir('Terragrunt/Terragrunt_files/dev') {
+                    dir('Terragrunt/Terragrunt_files/preprod') {
                     sh "terragrunt run-all  ${params.ACTION}"
                     }
                 }
@@ -69,7 +69,7 @@ pipeline {
         stage('Prod Environment') {
             steps {
                 script {
-                    dir('Terragrunt/Terragrunt_files/dev') {
+                    dir('Terragrunt/Terragrunt_files/prod') {
                     sh "terragrunt run-all  ${params.ACTION}"
                     }
                 }
