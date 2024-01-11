@@ -33,7 +33,7 @@ pipeline {
                 script {
                     sh ' sudo curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash '
                     dir('modules') {
-                        sh ' tflint --init'
+                        sh ' tflint --init --recursive'
                         sh ' tflint --module --recursive --force '
                     }
                 }
