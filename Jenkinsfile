@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     dir('Terragrunt/modules') {
-                    sh ' curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash '
+                    sh ' sudo curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash '
                     sh ' tflint --module --recursive '
                     }
                 }
@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     dir('Terragrunt/modules') {
-                    sh ' curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash '
+                    sh ' sudo curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash '
                     sh ' tfsec -s'
                     }
                 }
