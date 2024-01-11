@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     sh ' sudo curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash '
-                    dir('Terragrunt/modules') {
+                    dir('modules') {
                         sh ' tflint --init'
                         sh ' tflint --module --recursive --force '
                     }
@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     sh ' sudo curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash '
-                    dir('Terragrunt/modules') {
+                    dir('modules') {
                         sh ' tfsec -s'
                     }
                 }
@@ -52,7 +52,7 @@ pipeline {
         stage('Dev Environment') {
             steps {
                 script {
-                    dir('Terragrunt/Terragrunt_files/dev') {
+                    dir('Terragrunt_files/dev') {
                         sh 'terragrunt run-all  init'
                         sh "terragrunt run-all  ${params.ACTION} -auto-approve"
                     }
@@ -62,7 +62,7 @@ pipeline {
         stage('PreProd Environment') {
             steps {
                 script {
-                    dir('Terragrunt/Terragrunt_files/preprod') {
+                    dir('Terragrunt_files/preprod') {
                         sh 'terragrunt run-all  init'
                         sh "terragrunt run-all  ${params.ACTION}  -auto-approve"
                     }
@@ -72,7 +72,7 @@ pipeline {
         stage('Prod Environment') {
             steps {
                 script {
-                    dir('Terragrunt/Terragrunt_files/prod') {
+                    dir('Terragrunt_files/prod') {
                         sh 'terragrunt run-all  init'
                         sh "terragrunt run-all  ${params.ACTION} -auto-approve"
                     }
