@@ -28,6 +28,20 @@ pipeline {
                 }
             }
         }
+        stage("Generate Documentation") {
+            steps {
+                sh "terraform-docs markdown . --recursive --output-file README.md"
+                sh "git add modules"
+                sh "git commit -m 'Add terraform documentation from Jenkins'"
+            }
+        }
+        stage("Push to Git Repository") {
+            steps {
+                withCredentials([gitUsernamePassword(credentialsId: 'GitHubcredentials', gitToolName: 'Default')]) {
+                    sh "git push -u origin main"
+                }
+            }
+        }
         stage('Tflint Testing') {
             steps {
                 script {
