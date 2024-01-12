@@ -33,12 +33,15 @@ pipeline {
                 sh "terraform-docs markdown . --recursive --output-file README.md"
                 sh "git add modules"
                 sh "git commit -m 'Add terraform documentation from Jenkins'"
+                def currentBranch = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                if (currentBranch != 'main') {
+                        sh 'git checkout -B main'
+                }
             }
         }
         stage("Push to Git Repository") {
             steps {
                 withCredentials([gitUsernamePassword(credentialsId: 'GitHubcredentials', gitToolName: 'Default')]) {
-                    sh "git branch -m main"
                     sh "git push -u origin main"
                 }
             }
