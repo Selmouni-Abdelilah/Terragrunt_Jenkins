@@ -6,7 +6,7 @@ terraform {
 }
 
 dependency "west_rg" {
-    config_path = "../../west_rg"
+    config_path = "../west_rg"
     mock_outputs = {
       rg_name  = "West_rg_preprod_mock"
       location = "West Europe"

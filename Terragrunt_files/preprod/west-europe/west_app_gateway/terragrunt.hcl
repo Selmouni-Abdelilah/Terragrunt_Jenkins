@@ -5,21 +5,21 @@ terraform {
     source = "../../../../modules/app_gateway"
 }
 dependency "west_network" {
-    config_path = "../../west_vnet"
+    config_path = "../west_vnet"
     mock_outputs = {
       subnet_id  = "id_mock"
       public_ip_id= "pubid_mock"
     }
 }
 dependency "west_webapp" {
-    config_path = "../../west_webapp"
+    config_path = "../west_webapp"
     mock_outputs = {
       webapp_name = "webapp_mock"
     }
 }
 
 dependency "west_rg" {
-    config_path = "../../west_rg"
+    config_path = "../west_rg"
     mock_outputs = {
       rg_name  = "west_rg_preprod_mock"
       location = "West Europe"
