@@ -32,7 +32,7 @@ terraform {
       resource_group_name  = "tfstate"
       storage_account_name = "tfstate24429"
       container_name       = "tfstate"
-      key                  = "${path_relative_to_include()}/terraform.tfstate"
+      key                  = "preprod/${path_relative_to_include()}/terraform.tfstate"
   }
 }
  EOF
