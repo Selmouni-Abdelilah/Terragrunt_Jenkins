@@ -136,6 +136,7 @@ pipeline {
                     disableDeferredWipeout: true,
                     notFailBuild: true,
                     patterns: [[pattern: '**/*', type: 'INCLUDE']]
+            )
         }
     }
 }
