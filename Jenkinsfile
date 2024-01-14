@@ -74,7 +74,15 @@ pipeline {
                 script {
                     dir('Terragrunt_files/dev') {
                         sh 'terragrunt run-all  init'
-                        sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive -lock=false"
+                        dir('us-east'){
+                            sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive "
+                        }
+                        dir('west-europe'){
+                            sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive "
+                        }
+                        dir('traffic_manager'){
+                            sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive "
+                        }
                     }
                 }
             }    
@@ -84,7 +92,15 @@ pipeline {
                 script {
                     dir('Terragrunt_files/preprod') {
                         sh 'terragrunt run-all  init'
-                        sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive -lock=false"
+                        dir('us-east'){
+                            sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive "
+                        }
+                        dir('west-europe'){
+                            sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive "
+                        }
+                        dir('traffic_manager'){
+                            sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive "
+                        }
                     }
                 }
             }    
@@ -94,7 +110,15 @@ pipeline {
                 script {
                     dir('Terragrunt_files/prod') {
                         sh 'terragrunt run-all  init'
-                        sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive -lock=false"
+                        dir('us-east'){
+                            sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive "
+                        }
+                        dir('west-europe'){
+                            sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive "
+                        }
+                        dir('traffic_manager'){
+                            sh "terragrunt run-all  ${params.ACTION} --terragrunt-non-interactive "
+                        }
                     }
                 }
             }    
