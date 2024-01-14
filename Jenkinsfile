@@ -31,14 +31,13 @@ pipeline {
         stage("Generate Documentation") {
             steps {
                 script {
-                    dir("modules"){
-                        sh "terraform-docs markdown . --recursive --output-file README.md"
-                        sh "git add ."
-                        sh "git commit -m 'Add terraform documentation from Jenkins'"
-                        def currentBranch = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
-                        if (currentBranch != 'main') {
-                                sh 'git checkout -B main'
-                        }
+                    sh "terraform-docs markdown . --recursive --output-file README.md"
+                    sh "rm -f README.md"
+                    sh "git add ."
+                    sh "git commit -m 'Add terraform documentation from Jenkins'"
+                    def currentBranch = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                    if (currentBranch != 'main') {
+                            sh 'git checkout -B main'
                     }
                 }
             }
