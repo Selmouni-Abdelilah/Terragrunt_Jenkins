@@ -6,7 +6,7 @@ terraform {
 }
 
 inputs = {
-  rg_name              = "traffic_mnager_rg-dev"
+  rg_name              = "traffic_mnager_rg-prod"
   location             = "Central US"
 }
 
